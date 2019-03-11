@@ -1,0 +1,71 @@
+<?php
+
+namespace ForumBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+use ForumBundle\Entity\question;
+use ForumBundle\Entity\reponse;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+
+
+class DefaultController extends Controller
+{
+
+    /**
+     * @Route("/test", name="test")
+     */
+
+    public function indexAction()
+    {
+        return $this->render('@Forum/Default/index.html.twig');
+}
+
+/**
+* @Route("/afficher", name="afficher")
+*/
+
+public function listModelAction()
+{
+$modele = $this->getDoctrine()->getRepository(question::class)->findAll();
+return $this->render("@Forum/Default/affichertopics.twig", array('modele' => $modele));
+}
+
+/**
+* @Route("/repondre/{id_q}", name="repondre" , requirements={"id_q"="\d+"})
+*/
+
+public function traiterAction(Request $request, $id_q)
+{
+if ($request->isMethod("POST"))
+{
+$id_m=5;
+$reponse = new reponse();
+$em1=$this->getDoctrine()->getManager();
+$reponse->setDescription($request->get("description"));
+$reponse->setIdQ($id_q);
+$reponse->setIdM($id_m);
+$em1->persist($reponse);
+$em1->flush();
+return $this->redirectToRoute("afficher");
+}
+$modele = $this->getDoctrine()->getRepository(question::class)->find($id_q);
+$modeles = $this->getDoctrine()->getRepository(reponse::class)->findAll();
+return $this->render("@Forum/Default/traitertopic.twig", array('modele' => $modele,'modeles' => $modeles));
+}
+
+/**
+* @Route("/supprimer/{id_q}", name="supprimer" , requirements={"id_q"="\d+"})
+*/
+
+public function deleteModeleAction($id_q){
+$modele=$this->getDoctrine()->getRepository(question::class)->find($id_q);
+$em= $this->getDoctrine()->getManager();
+$em->remove($modele);
+$em->flush();
+return  $this->redirectToRoute("afficher");
+
+}
+
+
+}

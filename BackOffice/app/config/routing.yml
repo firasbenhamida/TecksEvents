@@ -1,0 +1,24 @@
+
+p:
+    resource: "@PromotionBundle/Resources/config/routing.yml"
+    prefix:   /p
+
+forum:
+    resource: "@ForumBundle/Resources/config/routing.yml"
+    prefix:   /
+
+appp:
+    resource: '@ForumBundle/Controller/'
+    type: annotation
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix: /
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /message

@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <form method="post">
+<div class="homepage-featured-events" xmlns="http://www.w3.org/1999/html">
+    <div class="container">
+        <center>
+            <div class="card" style="width: 120%">
+                <div class="card-header">
+                    <h3> Ban l'utilisateur {{ modele.username }}  </h3>
+                </div>
+                </br></br>
+            <label> <h5>Pendant (par moix/0 pour definitivement)</h5> <input type="number" name="nb"></label>
+                <label> <h5>Supprimer tous ses contribution au forum <input type="checkbox" name="bandef"></h5></label>
+                </br></br></br></br>
+                <div class="card-footer">
+                    <button name="bb" type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+        <input type="number" value={{ modele.id }} nom="id" hidden>
+                </div>
+               </div>
+
+        </center>
+    </div></div>
+        </form>
+    {% endif %}
+
+{% endblock %}

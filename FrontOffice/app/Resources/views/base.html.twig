@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+
+            <!-- FontAwesome CSS -->
+            <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+
+            <!-- Swiper CSS -->
+            <link rel="stylesheet" href="{{ asset('css/swiper.min.css') }}">
+
+            <!-- Styles -->
+            <link rel="stylesheet" href="{{ asset('style.css') }}">
+            <div id="generatetcss"><link rel="stylesheet" href="{{ asset('css/generateT.css') }}"></div>
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+            <style>
+
+
+
+                #a-footer {
+                    margin: 20px 0;
+                }
+
+                .new-react-version {
+                    padding: 20px 20px;
+                    border: 1px solid #eee;
+                    border-radius: 20px;
+                    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+
+                    text-align: center;
+                    font-size: 14px;
+                    line-height: 1.7;
+                }
+
+                .new-react-version .react-svg-logo {
+                    text-align: center;
+                    max-width: 60px;
+                    margin: 20px auto;
+                    margin-top: 0;
+                }
+
+
+
+
+
+                .success-box {
+                    margin:50px 0;
+                    padding:10px 10px;
+                    border:1px solid #eee;
+                    background:#f9f9f9;
+                }
+
+                .success-box img {
+                    margin-right:10px;
+                    display:inline-block;
+                    vertical-align:top;
+                }
+
+                .success-box > div {
+                    vertical-align:top;
+                    display:inline-block;
+                    color:#888;
+                }
+
+
+
+                /* Rating Star Widgets Style */
+                .rating-stars ul {
+                    list-style-type:none;
+                    padding:0;
+
+                    -moz-user-select:none;
+                    -webkit-user-select:none;
+                }
+                .rating-stars ul > li.star {
+                    display:inline-block;
+
+                }
+
+                /* Idle State of the stars */
+                .rating-stars ul > li.star > i.fa {
+                    font-size:2.5em; /* Change the size of the stars */
+                    color:#ccc; /* Color on idle state */
+                }
+
+                /* Hover state of the stars */
+                .rating-stars ul > li.star.hover > i.fa {
+                    color:#FFCC36;
+                }
+
+                /* Selected state of the stars */
+                .rating-stars ul > li.star.selected > i.fa {
+                    color:#FF912C;
+                }
+                </style>
+
+                <style>
+                #customers td, #customers th {
+                    padding: 20px;
+                    text-align: left;
+
+                }
+
+                #customers tr:hover {background-color: #dddd6c;}
+
+                #customers {
+                    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                    border-collapse: collapse;
+                    width:120%;
+                    text-align: center;
+                    background-color: #dbdbdd;
+
+                }
+                #customers th {
+                    padding-top: 12px;
+                    padding-bottom: 30px;
+                    text-align: center;
+                    background-color: #9549e1;
+                    color: white;
+                }
+            </style>
+
+            <style>
+                #customersss td, #customersss th {
+                    padding: 20px;
+                    text-align: center;
+
+                }
+
+                #customersss tr:hover {background-color: #dddd6c;}
+
+                #customersss {
+                    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                    border-collapse: collapse;
+                    width:100%;
+                    text-align: center;
+                    background-color: #dbdbdd;
+
+                }
+                #customersss th {
+                    padding-top: 12px;
+                    padding-bottom: 30px;
+                    text-align: center;
+                    background-color: #9549e1;
+                    color: white;
+                }
+            </style>
+
+            <style>
+                #customerss td, #customerss th {
+                    padding: 20px;
+                    text-align: right;
+                }
+                #customerss {
+                    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                    border-collapse: collapse;
+                    width:80%;
+                    text-align: right;
+                }
+            </style>
+
+
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <div>
+        {% block header %}
+            <header class="site-header">
+                <div class="header-bar">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-10 col-lg-2 order-lg-1">
+                                <div class="site-branding">
+                                    <div class="site-title">
+                                        <a href="#"><img src="{{ asset('images/logo.png') }}" alt="logo"></a>
+                                    </div><!-- .site-title -->
+                                </div><!-- .site-branding -->
+                            </div><!-- .col -->
+
+                            <div class="col-2 col-lg-7 order-3 order-lg-2">
+                                <nav class="site-navigation">
+                                    <div class="hamburger-menu d-lg-none">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div><!-- .hamburger-menu -->
+
+                                    <ul>
+                                        <li><a href="{{ path('index') }}">Home</a></li>
+                                        <li><a href="#">About us</a></li>
+                                        <li><a href="http://localhost/PiTeckWeb/web/app_dev.php">Events</a></li>
+                                        <li><a href="#">News</a></li>
+                                        {% if app.user %}
+                                            {%  if( app.user.username =="firas")%}
+                                                <li><a href="{{ path('book_homepage') }}">My Book( )</a></li>
+                                            {% endif %}
+                                        <li><a href="{{ path('ajouter') }}#balise">Forum add</a></li>
+                                        {% endif %}
+                                        <li><a href="{{ path('afficherq') }}#balise">Forum view</a></li>
+                                    </ul>
+                                </nav><!-- .site-navigation -->
+                            </div><!-- .col -->
+
+                            <div class="col-lg-3 d-none d-lg-block order-2 order-lg-3">
+                                {% if app.user %}
+                                    <div class="buy-tickets">
+                                        <a class="btn gradient-bg" href="{{ path('fos_user_profile_show') }}#balise"><h3>{{ app.user.username }}</h3></a>
+                                        {% if  fos_message_nb_unread()  !=0 %}
+                                    <form action="{{ path('fos_message_inbox') }}#balise">
+                                        <button class="btn btn-secondary " type="submit"    >
+                                            <h6>{{ fos_message_nb_unread() }} Nouveau message</h6>
+                                    </form>
+                                        {% else %}
+                                            <form action="{{ path('fos_message_inbox') }}#balise">
+                                                <button class="btn btn-secondary " type="submit"    >
+                                                    <h6>Envoyer un nouveau message</h6>
+                                            </form>
+                                            {% endif %}
+                                    </div><!-- .buy-tickets -->
+
+                                {% else %}
+                                    <div class="buy-tickets">
+                                        <a class="btn gradient-bg" href="{{ path('fos_user_security_login') }}#balise">Se connecté</a>
+                                    </div><!-- .buy-tickets -->
+                                    <div class="buy-tickets">
+                                        <a class="btn gradient-bg" href="{{ path('fos_user_registration_register') }}#balise">Créer un compte</a>
+                                    </div><!-- .buy-tickets -->
+
+                                {% endif %}
+                            </div><!-- .col -->
+                        </div><!-- .row -->
+                    </div><!-- .container-fluid -->
+                </div><!-- .header-bar -->
+
+                <div class="swiper-container hero-slider">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-date="2018/05/01" style="background: url({{ asset ('images/header-bg.jpg') }}) no-repeat">
+                            <div class="hero-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col flex flex-column justify-content-center">
+                                            <div class="entry-header">
+                                                <div class="countdown flex align-items-center">
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dday"></span>
+                                                        <label>Days</label>
+                                                    </div><!-- .countdown-holder -->
+
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dhour"></span>
+                                                        <label>Hours</label>
+                                                    </div><!-- .countdown-holder -->
+
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dmin"></span>
+                                                        <label>Minutes</label>
+                                                    </div><!-- .countdown-holder -->
+
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dsec"></span>
+                                                        <label>Seconds</label>
+                                                    </div><!-- .countdown-holder -->
+                                                </div><!-- .countdown -->
+
+                                                <h2 class="entry-title">1 We have the best events. <br>Get your tiket now!</h2>
+                                            </div><!--- .entry-header -->
+
+                                            <div class="entry-footer">
+                                                <a class="btn gradient-bg" href="#">Order here</a>
+                                            </div><!-- .entry-footer" -->
+                                        </div><!-- .col -->
+                                    </div><!-- .container -->
+                                </div><!-- .hero-content -->
+                            </div><!-- .swiper-slide -->
+                        </div><!-- .swiper-wrapper -->
+
+                        <div class="swiper-slide" data-date="2019/05/01" style="background: url({{ asset('images/header-bg.jpg') }}) no-repeat">
+                            <div class="hero-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col flex flex-column justify-content-center">
+                                            <div class="entry-header">
+                                                <div class="countdown flex align-items-center">
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dday"></span>
+                                                        <label>Days</label>
+                                                    </div><!-- .countdown-holder -->
+
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dhour"></span>
+                                                        <label>Hours</label>
+                                                    </div><!-- .countdown-holder -->
+
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dmin"></span>
+                                                        <label>Minutes</label>
+                                                    </div><!-- .countdown-holder -->
+
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dsec"></span>
+                                                        <label>Seconds</label>
+                                                    </div><!-- .countdown-holder -->
+                                                </div><!-- .countdown -->
+
+                                                <h2 class="entry-title">2 We have the best events. <br>Get your tiket now!</h2>
+                                            </div><!--- .entry-header -->
+
+                                            <div class="entry-footer">
+                                                <a class="btn gradient-bg" href="#">Order here</a>
+                                            </div><!-- .entry-footer" -->
+                                        </div><!-- .col -->
+                                    </div><!-- .container -->
+                                </div><!-- .hero-content -->
+                            </div><!-- .swiper-slide -->
+                        </div><!-- .swiper-wrapper -->
+
+                        <div class="swiper-slide" data-date="2020/05/01" style="background: url( {{ asset('images/header-bg.jpg') }}) no-repeat">
+                            <div class="hero-content">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col flex flex-column justify-content-center">
+                                            <div class="entry-header">
+                                                <div class="countdown flex align-items-center">
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dday"></span>
+                                                        <label>Days</label>
+                                                    </div><!-- .countdown-holder -->
+
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dhour"></span>
+                                                        <label>Hours</label>
+                                                    </div><!-- .countdown-holder -->
+
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dmin"></span>
+                                                        <label>Minutes</label>
+                                                    </div><!-- .countdown-holder -->
+
+                                                    <div class="countdown-holder flex align-items-baseline">
+                                                        <span class="dsec"></span>
+                                                        <label>Seconds</label>
+                                                    </div><!-- .countdown-holder -->
+                                                </div><!-- .countdown -->
+
+                                                <h2 class="entry-title">3 We have the best events. <br>Get your tiket now!</h2>
+                                            </div><!--- .entry-header -->
+
+                                            <div class="entry-footer">
+                                                <a class="btn gradient-bg" href="#">Order here</a>
+                                            </div><!-- .entry-footer" -->
+                                        </div><!-- .col -->
+                                    </div><!-- .container -->
+                                </div><!-- .hero-content -->
+                            </div><!-- .swiper-slide -->
+                        </div><!-- .swiper-wrapper -->
+                    </div>
+
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next flex justify-content-center align-items-center">
+                        <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1171 960q0 13-10 23l-466 466q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l393-393-393-393q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l466 466q10 10 10 23z"/></svg></span>
+                    </div>
+
+                    <div class="swiper-button-prev flex justify-content-center align-items-center">
+                        <span><svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1203 544q0 13-10 23l-393 393 393 393q10 10 10 23t-10 23l-50 50q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23z"/></svg></span>
+                    </div>
+                </div><!-- .swiper-container -->
+            </header><!-- .site-header -->
+            <div id="balise"></div>
+        {% endblock %}
+        {% block body %}
+        {% endblock %}
+        {% block footer %}
+            <div class="newsletter-subscribe">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <header class="entry-header">
+                                <h2 class="entry-title">Subscribe to our newsletter to get the latest trends & news</h2>
+                                <p>Join our database NOW!</p>
+                            </header>
+
+                            <div class="newsletter-form">
+                                <form class="flex flex-wrap justify-content-center align-items-center">
+                                    <div class="col-md-12 col-lg-3">
+                                        <input type="text" placeholder="Name">
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-6">
+                                        <input type="email" placeholder="Your e-mail">
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-3">
+                                        <input class="btn gradient-bg" type="submit" value="Subscribe">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="site-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <figure class="footer-logo">
+                                <a href="#"><img src="{{ asset('images/logo.png') }}" alt="logo"></a>
+                            </figure>
+
+                            <nav class="footer-navigation">
+                                <ul class="flex flex-wrap justify-content-center align-items-center">
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Events</a></li>
+                                    <li><a href="#">News</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </nav>
+
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+                            <div class="footer-social">
+                                <ul class="flex flex-wrap justify-content-center align-items-center">
+                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div></html>
+        {% endblock %}
+        {% block javascripts %}
+            <script type='text/javascript' src={{ asset('js/jquery.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/generatet.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/payment.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/masonry.pkgd.min.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/jquery.collapsible.min.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/swiper.min.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/jquery.countdown.min.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/circle-progress.min.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/jquery.countTo.min.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/custom.js') }}></script>
+            <script type='text/javascript' src={{ asset('js/rate.js') }}></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+            <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+            <script>
+                var doc = new jsPDF();
+                //toggle for form & badge
+                $(".js-switch").click(function() {
+                    $(".main-content").toggleClass("as-card");
+                });
+
+                //code for image preview
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#imager").attr("src", e.target.result);
+                };
+
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        $("#imager").css("visibility", "visible");
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#image-input").change(function() {
+                    readURL(this);
+                });
+            </script>
+        {% endblock %}
+    </body>
+</html>

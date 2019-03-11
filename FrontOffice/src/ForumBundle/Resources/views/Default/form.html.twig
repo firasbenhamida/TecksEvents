@@ -1,0 +1,83 @@
+
+
+
+    {% block body %}
+        {% if app.user %}
+            {{ form_start(form) }}
+
+    <form method="post">
+            <div class="homepage-featured-events">
+                <div class="container">
+                    <center>
+                        </br></br>
+
+                        <div class="col-lg-6" >
+                            <div class="card">
+                                <div class="card-header">
+                                    <strong  >Formulaire</strong> : Ajout dans le forum
+                                </div>
+                                <div class="card-body card-block">
+
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Titre :</label></div>
+                                            <div class="col-12 col-md-9"><textarea name="titre" id="textarea-input" rows="2" placeholder="Sujet..." class="form-control"></textarea></div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="select" class=" form-control-label">Select Categorie</label></div>
+                                            <div class="col-12 col-md-9">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description :</label></div>
+                                            <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="9" placeholder="Description..." class="form-control"></textarea></div>
+                                        </div>
+                                    {{ form_row(form.image) }}
+                                        <input name="nom" value="{{ app.user.username }}" hidden>
+                                        <input name="id" value="{{ app.user.id }}" hidden>
+
+                                        <center>
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                                </button>
+                                                <button type="reset" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-ban"></i> Reset
+                                                </button>
+
+                                            </div>
+                                        </center>
+                                    {{ form_end(form) }}
+                                    </form>
+                                </div>
+
+
+
+                            </div>
+                    </center>
+                </div></div>
+
+        {% endif %}
+
+
+
+
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

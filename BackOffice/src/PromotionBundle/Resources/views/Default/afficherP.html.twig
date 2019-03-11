@@ -1,0 +1,73 @@
+{% extends "backoffice_Promotion.html.twig" %}
+{% block body %}
+    <!DOCTYPE html>
+    <html>
+     <body>
+    <center>
+        </br></br></br></br>
+        <div id="content">
+        <table id="customers">
+            <tr>
+                <th>Titre</th>
+                <th>ID Promotion</th>
+                <th>ID Evennement</th>
+                <th>Promotion</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+
+            {%for entity in modele%}
+                <tr>
+                    <td> {{ entity.titre }}</td>
+                    <td> {{ entity.id }}</td>
+                    <td> {{ entity.idevent }}</td>
+                    <td> {{ entity.promo }} DT</td>
+                    <td> <a href="{{ path('modifierP',{id:entity.id}) }}">Modifier</a></td>
+                    <td> <a href="{{ path('supprimerP',{id:entity.id}) }}">Supprimer</a></td>
+                </tr>
+            {% else %}
+                <h3>Le tableau est vide</h3>
+            {% endfor %}
+        </table>
+        <input type="button" value="Imprimer la page" onclick="window.print()">
+
+
+
+
+
+        </div>
+        <div id="editor"></div>
+                <button id="cmd">Generate PDF</button>
+            <!--Add External Libraries - JQuery and jspdf
+            check out url - https://scotch.io/@nagasaiaytha/generate-pdf-from-html-using-jquery-and-jspdf
+            -->
+            <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+
+        <script>var doc = new jsPDF();
+            var specialElementHandlers = {
+                "#editor": function(element, renderer) {
+                    return true;
+        }
+        };
+
+        $("#cmd").click(function() {
+        doc.fromHTML($("#content").html(), 15, 15, {
+        width: 170,
+        elementHandlers: specialElementHandlers
+        });
+        doc.save("sample-file.pdf");
+        });
+</script>
+
+
+
+
+
+    </center>
+
+
+
+     </body>
+</html>
+{% endblock %}

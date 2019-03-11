@@ -1,0 +1,37 @@
+promotion_homepage:
+    path:     /
+    defaults: { _controller: PromotionBundle:Default:index }
+
+ajout:
+    path:     ajout/
+    defaults: { _controller: PromotionBundle:Default:ajout }
+
+afficherP:
+    path:     afficherP/
+    defaults: { _controller: PromotionBundle:Default:afficherP }
+
+afficherB:
+  path:     afficherB/
+  defaults: { _controller: PromotionBundle:Default:afficherB }
+
+supprimerP:
+  path:     supprimerP/{id}
+  defaults: { _controller: PromotionBundle:Default:deleteModele }
+
+modifierP:
+  path:     modifierP/{id}
+  defaults: { _controller: PromotionBundle:Default:modifierP }
+
+afficherT:
+    path:     afficherT/
+    defaults: { _controller: PromotionBundle:Default:afficherT }
+
+supprimerT:
+  path:     supprimerT/{id}
+  defaults: { _controller: PromotionBundle:Default:deleteModeleT }
+
+modifierT:
+  path:     modifierT/{id}
+  defaults: { _controller: PromotionBundle:Default:modifierT }
+
+

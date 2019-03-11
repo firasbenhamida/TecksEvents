@@ -1,0 +1,109 @@
+{% extends "backofficeforum.html.twig" %}
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="homepage-featured-events" xmlns="http://www.w3.org/1999/html">
+        <div class="container">
+
+
+
+            <center>
+
+                </br></br>
+
+                <div class="card" >
+                    <div class="card-header">
+                        <strong  >Sujet</strong> : <h3>{{ modele.titre }}</h3><a href="{{ path('supprimer',{id_q:modele.id}) }}">Supprimer</a>
+                    </div>
+                    <div class="card-body card-block">
+
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label class=" form-control-label"><h4>{{ modele.nom }}</h4><p><h6>Le {{ modele.date|date("d/m/Y") }}</h6></p></label></div>
+                            <div class="col-12 col-md-9">
+                                <p  class="form-control-static">{{ modele.description }}</p>
+
+                            </div>
+                            </br></br><hr width="90%" color="blue" align=center></br></br></br>
+                            {%for entity in modeles%}
+                                <div class="col col-md-3"><label class=" form-control-label"><h4>{{ entity.nom }}</h4><p>Le {{ entity.date|date("d/m/Y") }}</p></label></div>
+                                <div class="col-12 col-md-9">
+                                    <p  class="form-control-static">{{ entity.description }}</p>
+                                </div>
+                                <table id="customerss">
+                                    {%for entityy in modeless%}
+                                        {% if entityy.idr==entity.id %}
+                                            <tr>
+                                                <td><h5>{{ entityy.nom }}</h5><p>Le {{ entityy.date|date("d/m/Y") }}</p></td>
+                                                <td> <p  class="form-control-static">{{ entityy.description }}</p></td>
+                                                {% if app.user %}
+                                                    {% if entityy.idm == app.user.id  %}
+                                                        <form  method="post">
+                                                            <input name="idcomm" hidden value="{{ entityy.id }}">
+                                                            <td><input type="submit" value="supprimer"></td>
+                                                        </form>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                                {% if app.user %}
+                                    <table id="customerss">
+                                        <form  method="post" enctype="multipart/form-data" class="form-horizontal">
+                                            <div class="row form-group">
+                                                <tr>
+                                                    <td><div class="col col-md-3"><label for="textarea-input" class=" form-control-label"><h6>Commentaire:</h6></label></div> </td>
+                                                    <td> <input type="text" name="descriptionr"  value="Content..." >
+                                                    <td> <button name="bb" type="submit" class="btn btn-primary btn-sm">
+                                                            <i class="fa fa-dot-circle-o"></i> Submit
+                                                        </button> </td>
+                                                </tr>
+                                                <input name="idm" value="{{ app.user.id }}" hidden>
+                                                <input name="idr" value="{{ entity.id }}" hidden>
+                                                <input name="nom" value="{{ app.user.username }}" hidden>
+                                            </div>
+                                        </form>
+                                    </table>
+                                {% endif %}
+
+                                <hr width="80%" color="blue" align=center>
+
+                            {% endfor %}
+                        </div>
+                        {% if app.user %}
+                            <form  method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label"><h4>{{ app.user.username }}</h4> </label></div>
+                                    <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                                    <input name="nom" value="{{ app.user.username }}" hidden>
+                                    <input name="id" value="{{ app.user.id }}" hidden>
+                                </div>
+                                <center>
+                                    <div class="card-footer">
+                                        <button name="bb" type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> Submit
+                                        </button>
+                                        <button type="reset" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-ban"></i> Reset
+                                        </button>
+
+                                    </div>
+                                </center>
+                            </form>
+                        {% else %}
+                            <div class="row form-group">
+                                <a href="{{ path('fos_user_security_login') }}"><right><h3>Connectez vous pour mettre un commentaire</h3></right></a>
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+
+
+                </div>
+
+        </div></div></div></div></div></div>
+    </center>
+
+    </br></br></br></br></br></br>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "backofficeforum.html.twig" %}
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+
+    </br></br>
+
+    <div class="col-lg-6" >
+    <div class="card">
+        <div class="card-header">
+            <strong  >Renommer categories</strong> : {{ modele.type }}
+        </div>
+        <div class="card-body card-block">
+            <form  method="post" enctype="multipart/form-data" class="form-horizontal">
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Nouveau nom de la categories :</label></div>
+                    <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                </div>
+
+                <center>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                            <i class="fa fa-ban"></i> Reset
+                        </button>
+
+                    </div>
+                </center>
+            </form>
+        </div>
+
+
+
+    </div>
+
+
+
+    {% endif %}
+
+{% endblock %}

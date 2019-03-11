@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% block body %}
+        <style>
+                table, td, th {
+                        border: 1px solid black;
+                }
+
+                table {
+                        border-collapse: collapse;
+                        width: 100%;
+                }
+
+                th {
+                        height: 50px;
+                }
+        </style>
+<table>
+        <tr>
+       <th>
+        <a href="{{ path('book',{'nom': "Event1", 'prix': "10"}) }}">book1</a>
+       </th>
+        <th>
+        <a href="{{ path('book',{'nom': "Event2", 'prix': "15"}) }}">book2</a>
+        </th>
+            <th>
+        <a href="{{ path('book',{'nom': "Event3", 'prix': "7"}) }}">book3</a>
+            </th>
+            <th>
+                <a href="{{ path('book',{'nom': "Event4", 'prix': "20"}) }}">book4</a>
+            </th>
+
+        <br>
+        <a href="{{ path('viewbooks') }}">Viewbooks</a>
+        </tr>
+</table>
+{% endblock %}

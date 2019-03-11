@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <div class="homepage-featured-events">
+        <div class="container">
+<center>
+    </br></br>
+
+    <div class="col-lg-6" >
+    <div class="card">
+        {% if app.user %}
+    {% if banned.ban == 0 %}
+        {{ form_start(form) }}
+        <div class="card-header">
+            <strong  >Formulaire</strong> : Ajout dans le forum
+        </div>
+        <div class="card-body card-block">
+            <form  method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Titre :</label></div>
+                    <div class="col-12 col-md-9"><textarea name="titre" id="textarea-input" rows="2" placeholder="Sujet..." class="form-control" required></textarea></div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="select" class=" form-control-label">Select Categorie</label></div>
+                    <div class="col-12 col-md-9">
+                        <select name="select" id="select" class="form-control">
+                            {%for entity in modele %}
+                                <option value="{{ entity.type }}">{{ entity.type }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description :</label></div>
+                    <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="9" placeholder="Description..." class="form-control" required></textarea></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Choisir une image :</label></div>
+                    <div class="col-12 col-md-9"> {{ form_row(form.image) }}</div>
+                </div>
+                <input name="nom" value="{{ app.user.username }}" hidden>
+                <input name="id" value="{{ app.user.id }}" hidden>
+
+                <center>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                            <i class="fa fa-ban"></i> Reset
+                        </button>
+
+                    </div>
+                </center>
+                {{ form_end(form) }}
+            </form>
+        </div>
+
+    {% else %}
+                <h3>Banned ! Contacter al'dmin firas pour plus d'information</h3>
+    {% endif %}
+
+    </div>
+</center>
+        </div></div>
+
+    {% endif %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "backofficeforum.html.twig" %}
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+
+        <center>
+            </br></br></br></br>
+            <table id="customers">
+                <tr>
+                    <th>id</th>
+                    <th>Nom</th>
+                    <th>Renommer</th>
+                    <th>Supprimer</th>
+                </tr>
+
+                {%for entity in modele%}
+                    <tr>
+                        <td> {{ entity.id }} </td>
+                        <td> {{ entity.type }} </td>
+                        <td><a href="{{ path('renommer',{id_c:entity.id,type:entity.type} ) }}">Renommer</a></td>
+                        <td><a href="{{ path('supprimerc',{id_c:entity.id,type:entity.type} )  }}">Supprimer</a></td>
+                    </tr>
+                {% else %}
+                    <h3>Le tableau est vide</h3>
+                {% endfor %}
+            </table>
+
+            <a href="{{ path('ajoutc' )  }}">Ajouter categorie</a>
+        </center>
+
+
+    {% endif %}
+{% endblock %}

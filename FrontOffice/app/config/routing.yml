@@ -1,0 +1,38 @@
+graphe:
+    resource: "@GrapheBundle/Resources/config/routing.yml"
+    prefix:   /Graphe
+
+p:
+    resource: "@TicketBundle/Resources/config/routing.yml"
+    prefix:   /p
+
+forum:
+    resource: "@ForumBundle/Resources/config/routing.yml"
+    prefix:   /
+
+appp:
+    resource: '@ForumBundle/Controller/'
+    type: annotation
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /message
+
+choisirT:
+    path:     choisirT/
+    defaults: { _controller: TicketBundle:Default:choisirT }
+
+buyT:
+    path:     buyT/{id}
+    defaults: { _controller: TicketBundle:Default:buyT }
+
+mail_accuse:
+    path: /success
+    defaults: { _controller: MailBundle:Mail:success }

@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <div class="homepage-featured-events">
+    <div class="container">
+    <center>
+
+        <h1 style="color: #bf5a33">Forum</h1></center>
+        </br></br>
+        </br>
+
+
+
+        {%for entityy in modele1 %}
+        <table id="customers">
+            <tr>
+                <th colspan="4"><h3 >{{ entityy.type }}</h3></th>
+            </tr>
+            {%for entity in modele %}
+                {% if entity.categorie==entityy.type %}
+                    {%for entityyy in modele2 %}
+                    {% if entity.id==entityyy.idq %}
+                <tr onclick="location.href='{{ path('consulter',{id_q:entity.id} ) }}#balise'" >
+                    <td > <h4 style="color: #9a5bf0">{{ entity.nom }}</h4><h6>Le {{ entity.date|date("d/m/Y") }}</h6></td>
+                    <td style="text-align: left;"> {{ entity.titre }} </td>
+                    <td style="text-align: right;"> {{ entityyy.tab|length}} Vue</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+            {% else %}
+                <tr>
+                    <td><h6>Aucune donnée sur cette categories</h6></td>
+                </tr>
+            {% endfor %}
+        </table>
+                    </br></br>
+                {% endfor %}
+
+
+
+
+    </div></div>
+
+
+{% endblock %}

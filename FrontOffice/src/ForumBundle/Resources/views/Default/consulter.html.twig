@@ -1,0 +1,205 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="homepage-featured-events" xmlns="http://www.w3.org/1999/html">
+    <div class="container">
+
+        <section class='rating-widget'>
+
+            <!-- Rating Stars Box -->
+            <div class='rating-stars text-center'>
+                <ul id='stars'  >
+                    <li class='star' title='Poor' data-value='1'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Fair' data-value='2'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Good' data-value='3'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='Excellent' data-value='4'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                    <li class='star' title='WOW!!!' data-value='5'>
+                        <i class='fa fa-star fa-fw'></i>
+                    </li>
+                </ul>
+            </div>
+            <div class='success-box'>
+                <div class='clearfix'></div>
+                <div class='text-message'></div>
+                <div class='clearfix'></div>
+            </div>
+        </section>
+
+        <center>
+
+    </br></br>
+
+    <div class="card" style="width: 120%">
+        <div class="card-header">
+            {% if is_granted('ROLE_ADMIN') %}
+                <form  method="post">
+                    <input name="idquestion" hidden value="{{ modele.id }}">
+                    <h3 style="text-align: right"><input type="submit" value="s" ></h3>
+                </form>
+                <form  method="post">
+                    <input name="idban" hidden value="{{ modele.idMembre }}">
+                    <h3 style="text-align: right"><input type="submit" value="B" ></h3>
+                </form>
+            {% endif %}
+            <strong  >Sujet :  </strong>  <h1>{{ modele.titre }} </h1>
+
+            <h6 style="text-align: right">Vue par : <select>
+
+                    {% for E in vues %}
+                        <option> {{ E.tab|length}} Membre(s)</option>
+                        {% for e in E.Tab %}
+                            {% for user in model %}
+                                {% if user.id==e %}
+                                    <option disabled>{{ user.username }}</option>
+                                {% endif%}
+                            {% endfor %}
+                        {% endfor %}
+                    {% else %}
+
+                    {% endfor %}
+                </select></h6>
+
+        </div>
+        <div class="card-body card-block">
+            {% if modele.image != NULL %}<img src="{{ asset('uploads/images/' ~ modele.image) }}" height="400px" width="700px">{% endif %}</br>
+                <div class="row form-group">
+
+                    <div class="col col-md-3"><label class=" form-control-label"><h4>{{ modele.nom }}</h4><h5>staut :{{ infooo.activite }}</h5><p><h6>Le {{ modele.date|date("d/m/Y") }}</h6></p></label></div>
+                    <div class="col-12 col-md-9">
+                        <p  class="form-control-static">{{ modele.description }}</p>
+
+                    </div>
+                    </br></br><hr width="90%" color="blue" align=center></br></br></br>
+                    {%for entity in modeles%}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <form  method="post">
+                                <input name="idreponse" hidden value="{{ entity.id }}">
+                                <h3 style="text-align: right"><input type="submit" value="s" ></h3>
+                            </form>
+                            <form  method="post">
+                                <input name="idban" hidden value="{{ entity.idM }}">
+                                <h3 style="text-align: right"><input type="submit" value="B" ></h3>
+                            </form>
+                        {% endif %}
+                        {% for e in info %}
+                        {% if e.idm==entity.idm %}
+                            <div class="col col-md-3"><label class=" form-control-label"><h4>{{ entity.nom }}</h4> <h5>staut :{{ e.activite }}</h5><p>Le {{ entity.date|date("d/m/Y") }}</p></label></div>
+                        {% endif %}
+                        {% endfor %}
+                        <div class="col-12 col-md-9">
+                            <p  class="form-control-static">{{ entity.description }}</p>
+                        </div>
+                        <table id="customerss">
+                    {%for entityy in modeless%}
+                        {% if entityy.idr==entity.id %}
+                            {% if is_granted('ROLE_ADMIN') %}
+
+                                <tr>
+                                    <td colspan="3"><form  method="post">
+                                            <input name="idcomm" hidden value="{{ entityy.id }}">
+                                            <h3 style="text-align: right"><input type="submit" value="s" ></h3>
+                                        </form>
+                                        <form  method="post">
+                                            <input name="idban" hidden value="{{ entityy.idM }}">
+                                            <h3 style="text-align: right"><input type="submit" value="B" ></h3>
+                                        </form></td>
+                                </tr>
+                                        <td colspan="3"></td>
+
+
+
+                            {% endif %}
+                        <tr>
+                            {% for e in info %}
+                                {% if e.idm==entity.idm %}
+                                    <td><h5>{{ entityy.nom }} </h5><h6>staut :{{ e.activite }}</h6><p>Le {{ entityy.date|date("d/m/Y") }}</p></td>                                {% endif %}
+                            {% endfor %}
+
+                            <td> <p  class="form-control-static">{{ entityy.description }}</p></td>
+                            {% if app.user %}
+                            {% if entityy.idm == app.user.id  %}
+                                {% if banned.ban == 0 %}
+                                <form  method="post">
+                                    <input name="idcomm" hidden value="{{ entityy.id }}">
+                               <td><input type="submit" value="supprimer"></td>
+                                </form>
+                                {% endif %}
+                            {% endif %}
+                            {% endif %}
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                        </table>
+                        {% if app.user %}
+                        {% if banned.ban == 0 %}
+                    <table id="customerss">
+                    <form  method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <div class="row form-group">
+                               <tr>
+                                   <td><h6>Commentaire:</h6></td>
+                                   <td> <input type="text" name="descriptionr"  value="Content..." >
+                                   <td> <button name="bb" type="submit" class="btn btn-primary btn-sm">
+                                           <i class="fa fa-dot-circle-o"></i> Submit
+                                       </button> </td>
+                               </tr>
+                                <input name="idm" value="{{ app.user.id }}" hidden>
+                                <input name="idr" value="{{ entity.id }}" hidden>
+                                <input name="nom" value="{{ app.user.username }}" hidden>
+                            </div>
+                    </form>
+                            </table>
+                            {% endif %}
+                        {% endif %}
+
+                       <hr width="80%" color="blue" align=center>
+
+                    {% endfor %}
+                </div>
+                {% if app.user %}
+            {% if banned.ban == 0 %}
+            <form  method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label"><h4>{{ app.user.username }}</h4> </label></div>
+                    <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
+                    <input name="nom" value="{{ app.user.username }}" hidden>
+                    <input name="id" value="{{ app.user.id }}" hidden>
+                </div>
+                <center>
+                    <div class="card-footer">
+                        <button name="bb" type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                            <i class="fa fa-ban"></i> Reset
+                        </button>
+
+                    </div>
+                </center>
+            </form>
+            {% else %}
+                <h3>Banned ! Contacter al'dmin firas pour plus d'information</h3>
+            {% endif %}
+                {% else %}
+                    <div class="row form-group">
+                        <a href="{{ path('fos_user_security_login') }}"><right><h3>Connectez vous pour mettre un commentaire</h3></right></a>
+                    </div>
+                {% endif %}
+
+        </div>
+
+
+
+    </div>
+
+    </div></div></div></div></div></div>
+</center>
+
+    </br></br></br></br></br></br>
+{% endblock %}

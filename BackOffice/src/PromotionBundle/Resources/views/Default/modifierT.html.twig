@@ -1,0 +1,32 @@
+{% extends "backoffice_Promotion.html.twig" %}
+{% block body %}
+    <!DOCTYPE html>
+    <html>
+    <body>
+    <center>
+        </br></br></br></br>
+        <form method="post">
+            <table id="customers">
+                <tr>
+                    <th>ID Ticket</th>
+                    <th>Prix</th>
+                    <th>Type</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+
+
+                <tr>
+                    <td><input type="text" name="id" value=" {{ modele.id }}" disabled></td>
+                    <td><input type="text" name="prix" value=" {{ modele.prix }}" ></td>
+                    <td> <input type="text" name="type" value="{{ modele.type }} "></td>
+                    <td><button type="submit">save</button></td>
+                    <td> <a href="{{ path('supprimerT',{id:modele.id}) }}">Supprimer</a></td>
+                </tr>
+
+            </table>
+    </center>
+    </form>
+    </body>
+    </html>
+{% endblock %}

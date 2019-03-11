@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<form method="post">
+<table id="custumers">
+    <tr>
+        <th>event name</th>
+        <th>event code</th>
+        <th>event price</th>
+    </tr>
+    {% for t in books %}
+    <tr>
+        <td>{{ t.Nomevent }}</td>
+        <td>{{ t.code }}</td>
+        <td>{{ t.Prixt }}</td>
+        <td> <a href="{{ path('deletebook',{'id': t.id }) }}">delete</a> </td>
+    </tr>
+    {% endfor %}
+    <tr>
+
+        <th>total: {{ sum }}</th>
+    </tr>
+</table>
+    <input hidden type="number" name="prix" value={{ sum }} >
+<input type="submit" value="Payer">
+</form>
+{% endblock %}

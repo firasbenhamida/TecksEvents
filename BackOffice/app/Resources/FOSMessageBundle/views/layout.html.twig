@@ -1,0 +1,35 @@
+{% extends "backofficeforum.html.twig" %}
+{% block body %}
+    </br></br></br>
+    <center>
+        <div class="homepage-featured-events">
+            <div class="container">
+                <div class="card" >
+                    <div class="card-header">
+                        <strong  > <h1>{% trans from 'FOSMessageBundle' %}messenger{% endtrans %}</h1></strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}" />
+                            <title>{% trans from 'FOSMessageBundle' %}messenger{% endtrans %}</title>
+                        </head>
+
+                        <body>
+
+
+
+                        <ul>
+                            <li><a href="{{ url('fos_message_inbox') }}#balise">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</a></li>
+                            <li><a href="{{ url('fos_message_sent') }}#balise">{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</a></li>
+                            <li><a href="{{ url('fos_message_deleted') }}#balise">{% trans from 'FOSMessageBundle' %}deleted{% endtrans %}</a></li>
+                        </ul>
+                        </br>
+                        {% block fos_message_content %}{% endblock %}
+
+                        </body>
+                        </html>
+                    </div></div></div>
+    </center>
+{% endblock %}

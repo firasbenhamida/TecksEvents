@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+<form action="" method="POST">
+    <div class="main-content printed">
+        <div class="header"> <span>Attendee Information Form</span><span>Your Ticket</span></div>
+        <div class="id__wrapper" id="card">
+                <div class="deco"></div>
+                <label class="your-face" id="image-form" for="image-input">
+                    <input type="file" id="image-input"/>
+                    <div class="image-persuader">Upload Image Here</div><img id="imager" src="#" alt="Your Image Here"/>
+                </label>
+            <input type="hidden" name="id_event" value="{{ event.id }}">
+                <div class="name">
+                    <label>Prénom</label>
+                    <textarea name="prenom_person" class="full"></textarea>
+                </div>
+                <div class="job">
+                    <label>Nom</label>
+                    <input nom="nom_person" class="full"/>
+                </div>
+                <div class="country">
+                    <label>Location</label>
+                    <input nom="localisation" value="{{ event.localisation }}" class="full"/>
+                </div>
+                <div class="twitter">
+                    <label>Prix</label>
+                    <input type="number" name="prix" value="{{ event.prix }}" class="full" />
+                </div>
+                <div class="codepen">
+                    <label>Pass Code</label>
+                    <input disabled class="full" value="check mail for code"/>
+                </div>
+                <div class="blood">
+                    <label>Your Expertise</label>
+
+                 <select  name="type">
+                     <option>VIP</option>
+                     <option>Gold</option>
+                     <option>Silver</option>
+                 </select>
+                </div>
+            </div>
+        </div>
+        <aside class="context">
+            <div class="explanation">
+                <button class="js-switch" type="submit">Click me1</button>
+                <div class="js-switch">Click me</div>
+
+            </div>
+        </aside>
+    </div>
+</form>
+    <button onclick="downloadImg();">Download</button>
+    <script>
+        function downloadImg() {
+            var html = "<html>";
+            var chem = document.getElementById("generatetcss").innerHTML;
+            html += chem;
+            html += document.getElementById("card").innerHTML;
+            html += "</html>";
+
+            var printWin = window.open('', '', 'left=0,top=0,width=1,height=1,toolbar=0,scrollbars=0,status  =0');
+            printWin.document.write(html);
+            printWin.document.close();
+            printWin.focus();
+            printWin.print();
+            printWin.close();
+        }
+    </script>
+{% endblock %}

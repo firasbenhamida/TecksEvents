@@ -1,0 +1,33 @@
+{% extends "backoffice_Promotion.html.twig" %}
+{% block body %}
+    <!DOCTYPE html>
+    <html>
+    <body>
+    <h1> Ajouter </h1>
+    <form method="post">
+        <table id="customers">
+            <tr>
+                <th>ID Event: </th>
+                <td><select name="idevent">
+                        {% for entity in evenements %}
+                            <option  value="{{ entity.id }}"> {{ entity.titre }}</option>
+                        {% endfor %}
+                    </select></td>
+            </tr>
+            <th>Titre: </th>
+            <td><input type="text" name="stock"   ></td>
+            <tr>
+                <th>promotion: </th>
+                <td>  <textarea name="stock1"></textarea></td>
+
+            </tr>
+        </table>
+        <button type="submit">Confirmer</button>
+    </form>
+    </body>
+    </html>
+
+
+{% endblock %}
+
+

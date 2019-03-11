@@ -1,0 +1,32 @@
+choisirt:
+    path:     /
+    defaults: { _controller: TicketBundle:Default:choisirT }
+
+buyT:
+    path:     buyT/{id}
+    defaults: { _controller: TicketBundle:Default:buyT }
+
+ticket_homepage:
+    path:     /acheterTicket/{id}
+    defaults: { _controller: TicketBundle:Default:index }
+
+book_homepage:
+    path:     /bookpage
+    defaults: { _controller: TicketBundle:Default:bookpage }
+
+payment:
+    path:     /pay
+    defaults: { _controller: TicketBundle:Default:payment }
+
+book:
+    path:     /book/{nom}/{prix}
+    defaults: { _controller: TicketBundle:Default:book }
+
+viewbooks:
+    path:     /viewbooks
+    defaults: { _controller: TicketBundle:Default:viewbooks }
+
+deletebook:
+    path:     /deletebook/{id}
+    defaults: { _controller: TicketBundle:Default:deletebook }
+
